@@ -18,7 +18,8 @@ import MoreVertIcon from "@material-ui/icons/MoreVert";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 345,
+    // maxWidth: 345,
+    maxWidth: 500,
   },
   media: {
     height: 0,
@@ -56,7 +57,7 @@ export default function RecipeReviewCard({
   };
 
   return (
-    <Card className={classes.root}>
+    <Card className={classes.root} square>
       <CardHeader
         avatar={
           <Avatar

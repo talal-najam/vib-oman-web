@@ -10,12 +10,6 @@ import {
   Typography,
   Grid,
   Button,
-  Checkbox,
-  FormControlLabel,
-  Radio,
-  RadioGroup,
-  FormLabel,
-  Slider,
 } from "@material-ui/core";
 
 function Banner(props) {
@@ -35,7 +29,7 @@ function Banner(props) {
         <Typography className="Caption">{props.item.Caption}</Typography>
 
         <Button variant="outlined" className="ViewButton">
-          View Now
+          {props.item.Button}
         </Button>
       </CardContent>
     </Grid>
@@ -72,49 +66,54 @@ function Banner(props) {
   );
 }
 
-const items = [
+export const items = [
   {
-    Name: "Electronics",
-    Caption: "Electrify your friends!",
+    Name: "Latest Deals!",
+    Caption: "Premium Products - Best Prices!",
+    Button: "Shop Now",
     contentPosition: "left",
     Items: [
       {
-        Name: "Macbook Pro",
-        Image: "https://source.unsplash.com/featured/?macbook",
+        Name: "Shop Razer",
+        Image:
+          "https://images.unsplash.com/photo-1566055972289-c52022ae23b7?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1352&q=80",
       },
       {
-        Name: "iPhone",
-        Image: "https://source.unsplash.com/featured/?iphone",
+        Name: "Custom Rigs",
+        Image:
+          "https://images.unsplash.com/photo-1587302912306-cf1ed9c33146?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=656&q=80",
       },
     ],
   },
   {
-    Name: "Home Appliances",
-    Caption: "Say no to manual home labour!",
+    Name: "The Ultimate Gaming Zone",
+    Caption: "Game in our modern lounges across Oman",
+    Button: "View More",
     contentPosition: "middle",
     Items: [
       {
-        Name: "Washing Machine WX9102",
-        Image: "https://source.unsplash.com/featured/?washingmachine",
+        Name: "Premium Lounges",
+        Image: "https://images.unsplash.com/photo-1624138149925-6c1dd2d60460?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
       },
       {
-        Name: "Learus Vacuum Cleaner",
-        Image: "https://source.unsplash.com/featured/?vacuum,cleaner",
+        Name: "Team Rooms",
+        Image: "https://images.unsplash.com/photo-1598550489906-85edc42981c0?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
       },
     ],
   },
   {
-    Name: "Decoratives",
-    Caption: "Give style and color to your living room!",
+    Name: "Join the Community",
+    Caption: "Sign up now and interact with gamers from across Oman",
+    Button: "Sign Up",
     contentPosition: "right",
     Items: [
       {
-        Name: "Living Room Lamp",
-        Image: "https://source.unsplash.com/featured/?lamp",
+        Name: "Exclusive Leaderboard",
+        Image: "https://images.unsplash.com/photo-1578269174936-2709b6aeb913?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1351&q=80",
       },
       {
-        Name: "Floral Vase",
-        Image: "https://source.unsplash.com/featured/?vase",
+        Name: "Tournaments",
+        Image: "https://images.unsplash.com/photo-1558008258-3256797b43f3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1489&q=80",
       },
     ],
   },
@@ -129,7 +128,7 @@ class BannerExample extends React.Component {
       animation: "fade",
       indicators: true,
       timeout: 500,
-      navButtonsAlwaysVisible: false,
+      navButtonsAlwaysVisible: true,
       navButtonsAlwaysInvisible: false,
       cycleNavigation: true,
     };
@@ -181,8 +180,8 @@ class BannerExample extends React.Component {
 
   render() {
     return (
-      <div style={{ marginTop: "50px", color: "#494949" }}>
-        <h2>Example: eBay&trade; style</h2>
+      <div style={{ marginTop: "50px", color: "#ffffff" }}>
+        <Typography variant="h5" >VIB&trade; - Featured</Typography>
 
         <Carousel
           className="Example"
@@ -208,11 +207,6 @@ class BannerExample extends React.Component {
               `OnChange User Callback: Now displaying child${now}. Previously displayed child${previous}`
             )
           }
-          // fullHeightHover={false}
-          // navButtonsProps={{style: {backgroundColor: 'cornflowerblue', borderRadius: 0}}}
-          // navButtonsWrapperProps={{style: {bottom: '0', top: 'unset', }}}
-          // indicatorContainerProps={{style: {margin: "20px"}}}
-          // NextIcon='next'
         >
           {items.map((item, index) => {
             return (
@@ -224,108 +218,6 @@ class BannerExample extends React.Component {
             );
           })}
         </Carousel>
-
-        <FormLabel component="legend">Options</FormLabel>
-        <FormControlLabel
-          control={
-            <Checkbox
-              onChange={this.toggleAutoPlay}
-              checked={this.state.autoPlay}
-              value="autoplay"
-              color="primary"
-            />
-          }
-          label="Auto-play"
-        />
-        <FormControlLabel
-          control={
-            <Checkbox
-              onChange={this.toggleIndicators}
-              checked={this.state.indicators}
-              value="indicators"
-              color="primary"
-            />
-          }
-          label="Indicators"
-        />
-        <FormControlLabel
-          control={
-            <Checkbox
-              onChange={this.toggleNavButtonsAlwaysVisible}
-              checked={this.state.navButtonsAlwaysVisible}
-              value="NavButtonsAlwaysVisible"
-              color="primary"
-            />
-          }
-          label="NavButtonsAlwaysVisible"
-        />
-
-        <FormControlLabel
-          control={
-            <Checkbox
-              onChange={this.toggleNavButtonsAlwaysInvisible}
-              checked={this.state.navButtonsAlwaysInvisible}
-              value="NavButtonsAlwaysInvisible"
-              color="primary"
-            />
-          }
-          label="NavButtonsAlwaysInvisible"
-        />
-        <FormControlLabel
-          control={
-            <Checkbox
-              onChange={this.toggleCycleNavigation}
-              checked={this.state.cycleNavigation}
-              value="CycleNavigation"
-              color="primary"
-            />
-          }
-          label="CycleNavigation"
-        />
-
-        <FormControlLabel
-          control={
-            <RadioGroup
-              name="animation"
-              value={this.state.animation}
-              onChange={this.changeAnimation}
-              row
-              style={{ marginLeft: "10px" }}
-            >
-              <FormControlLabel
-                value="fade"
-                control={<Radio color="primary" />}
-                label="Fade"
-              />
-              <FormControlLabel
-                value="slide"
-                control={<Radio color="primary" />}
-                label="Slide"
-              />
-            </RadioGroup>
-          }
-        />
-
-        <FormControlLabel
-          control={
-            <div style={{ width: 300 }}>
-              <Typography id="discrete-slider" gutterBottom>
-                Animation Duration (Timeout) in ms
-              </Typography>
-              <Slider
-                defaultValue={500}
-                getAriaValueText={() => `${this.state.timeout}ms`}
-                aria-labelledby="discrete-slider"
-                valueLabelDisplay="auto"
-                step={100}
-                marks
-                min={100}
-                max={2000}
-                onChange={this.changeTimeout}
-              />
-            </div>
-          }
-        />
       </div>
     );
   }
