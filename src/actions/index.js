@@ -2,7 +2,7 @@
 import action from "./action";
 // import { langs } from "../lang";
 
-const REACT_APP_API_HOST = "http://localhost:5000/";
+const REACT_APP_API_HOST = "http://localhost:5000";
 
 // export const getProducts = () =>
 //   action("products", process.env.REACT_APP_API_HOST, "api/products");

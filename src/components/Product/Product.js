@@ -5,7 +5,12 @@ import ProductCard from "./Card";
 import { getProducts } from "../../actions";
 import data from "./dummyData";
 
-function Product() {
+const Product = ({ onGetProducts }) => {
+
+  useEffect(() => {
+    onGetProducts();
+  }, [])
+
   return (
     <div>
       <Container maxWidth="lg">
@@ -34,8 +39,8 @@ const mapStateToProps = (state) => ({
   products: state.app.products.data,
 });
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = {
   onGetProducts: getProducts,
-});
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Product);

@@ -8,6 +8,7 @@ import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import store from "./store";
 import { createBrowserHistory } from "history";
+import { getProducts } from "./actions";
 
 const darkTheme = createTheme({
   palette: {

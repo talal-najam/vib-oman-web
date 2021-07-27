@@ -1,13 +1,16 @@
 import querystring from "querystring";
 
-
 export default function action(type, host, path, params = {}, transform) {
   return (dispatch) => {
+    console.log("triggering action");
+
     const url = `${host}/${path}?${
       typeof params === "string"
         ? params.substring(1)
         : querystring.stringify(params)
     }`;
+
+    console.log("url", url);
     const getDataStart = () => ({
       type: `REQUEST/${type}`,
     });
