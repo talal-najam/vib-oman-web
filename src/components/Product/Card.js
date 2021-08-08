@@ -14,12 +14,20 @@ import { red } from "@material-ui/core/colors";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import ShareIcon from "@material-ui/icons/Share";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     // maxWidth: 345,
     maxWidth: 500,
+    background: 'hsla(189, 95%, 7%, 1)',
+
+    background: 'linear-gradient(90deg, hsla(189, 95%, 7%, 1) 0%, hsla(191, 94%, 7%, 1) 100%)',
+    
+    background: '-moz-linear-gradient(90deg, hsla(189, 95%, 7%, 1) 0%, hsla(191, 94%, 7%, 1) 100%)',
+    
+    background: '-webkit-linear-gradient(90deg, hsla(189, 95%, 7%, 1) 0%, hsla(191, 94%, 7%, 1) 100%)',
+    
+    filter: 'progid: DXImageTransform.Microsoft.gradient( startColorstr="#011F24", endColorstr="#011C22", GradientType=1 )',
   },
   media: {
     height: 0,

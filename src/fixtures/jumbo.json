@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "title": "Build your own PC.",
+    "subTitle": "Choose the right components from our wide range of products from premium brands.",
+    "image": "/images/misc/home-pc.jpg",
+    "alt": "Tiger King on Netflix",
+    "direction": "row"
+  },
+  {
+    "id": 2,
+    "title": "Build the Ultimate Gaming Experience.",
+    "subTitle": "Browse through our list of products to build your dream gaming setup.",
+    "image": "/images/misc/home-setup.jpg",
+    "alt": "Watch on mobile",
+    "direction": "row-reverse"
+  },
+  {
+    "id": 3,
+    "title": "Game Hard",
+    "subTitle": "Compete against friends, climb through the leaderboards, and join the fastest growing gaming community in Oman.",
+    "image": "/images/misc/dotawallpaper.jpg",
+    "alt": "Money Heist on Netflix",
+    "direction": "row"
+  }
+]

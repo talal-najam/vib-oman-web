@@ -1,6 +1,7 @@
 // import querystring from "querystring";
 import action from "./action";
 // import { langs } from "../lang";
+// import transformProducts from './transformProducts'
 
 const REACT_APP_API_HOST = "http://localhost:5000";
 
@@ -9,9 +10,9 @@ const REACT_APP_API_HOST = "http://localhost:5000";
 export const getProducts = () =>
   action("products", REACT_APP_API_HOST, "api/products");
 export const getBrands = () =>
-  action("brands", process.env.REACT_APP_API_HOST, "api/brands");
+  action("brands", REACT_APP_API_HOST, "api/brands");
 export const getCategories = () =>
-  action("categories", process.env.REACT_APP_API_HOST, "api/categories");
+  action("categories", REACT_APP_API_HOST, "api/categories");
 
 // export const getStrings = () => async (dispatch) => {
 //   const getLang = lang => langs.find(item => item.value === lang);

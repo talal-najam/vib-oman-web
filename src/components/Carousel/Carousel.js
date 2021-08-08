@@ -2,6 +2,7 @@ import React from "react";
 import Carousel from "react-material-ui-carousel";
 import autoBind from "auto-bind";
 import "./carousel.css";
+import { Box } from "@material-ui/core";
 
 import {
   Card,
@@ -13,7 +14,6 @@ import {
 } from "@material-ui/core";
 
 function Banner(props) {
-  if (props.newProp) console.log(props.newProp);
   const contentPosition = props.contentPosition
     ? props.contentPosition
     : "left";
@@ -27,10 +27,11 @@ function Banner(props) {
         <Typography className="Title">{props.item.Name}</Typography>
 
         <Typography className="Caption">{props.item.Caption}</Typography>
-
-        <Button variant="outlined" className="ViewButton">
-          {props.item.Button}
-        </Button>
+        <Box justifyContent="flex-end">
+          <Button variant="outlined" className="ViewButton">
+            {props.item.Button}
+          </Button>
+        </Box>
       </CardContent>
     </Grid>
   );
@@ -71,17 +72,17 @@ export const items = [
     Name: "Latest Deals!",
     Caption: "Premium Products - Best Prices!",
     Button: "Shop Now",
-    contentPosition: "left",
+    contentPosition: "right",
     Items: [
-      {
-        Name: "Shop Razer",
-        Image:
-          "https://images.unsplash.com/photo-1566055972289-c52022ae23b7?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1352&q=80",
-      },
       {
         Name: "Custom Rigs",
         Image:
           "https://images.unsplash.com/photo-1587302912306-cf1ed9c33146?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=656&q=80",
+      },
+      {
+        Name: "Shop Razer",
+        Image:
+          "https://images.unsplash.com/photo-1566055972289-c52022ae23b7?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1352&q=80",
       },
     ],
   },
@@ -93,11 +94,13 @@ export const items = [
     Items: [
       {
         Name: "Premium Lounges",
-        Image: "https://images.unsplash.com/photo-1624138149925-6c1dd2d60460?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+        Image:
+          "https://images.unsplash.com/photo-1624138149925-6c1dd2d60460?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
       },
       {
         Name: "Team Rooms",
-        Image: "https://images.unsplash.com/photo-1598550489906-85edc42981c0?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+        Image:
+          "https://images.unsplash.com/photo-1598550489906-85edc42981c0?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
       },
     ],
   },
@@ -105,15 +108,17 @@ export const items = [
     Name: "Join the Community",
     Caption: "Sign up now and interact with gamers from across Oman",
     Button: "Sign Up",
-    contentPosition: "right",
+    contentPosition: "left",
     Items: [
       {
         Name: "Exclusive Leaderboard",
-        Image: "https://images.unsplash.com/photo-1578269174936-2709b6aeb913?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1351&q=80",
+        Image:
+          "https://images.unsplash.com/photo-1578269174936-2709b6aeb913?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1351&q=80",
       },
       {
         Name: "Tournaments",
-        Image: "https://images.unsplash.com/photo-1558008258-3256797b43f3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1489&q=80",
+        Image:
+          "https://images.unsplash.com/photo-1558008258-3256797b43f3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1489&q=80",
       },
     ],
   },
@@ -180,9 +185,7 @@ class BannerExample extends React.Component {
 
   render() {
     return (
-      <div style={{ marginTop: "50px", color: "#ffffff" }}>
-        <Typography variant="h5" >VIB&trade; - Featured</Typography>
-
+      <div style={{ marginTop: "25px", color: "#ffffff" }}>
         <Carousel
           className="Example"
           autoPlay={this.state.autoPlay}
@@ -192,21 +195,6 @@ class BannerExample extends React.Component {
           cycleNavigation={this.state.cycleNavigation}
           navButtonsAlwaysVisible={this.state.navButtonsAlwaysVisible}
           navButtonsAlwaysInvisible={this.state.navButtonsAlwaysInvisible}
-          next={(now, previous) =>
-            console.log(
-              `Next User Callback: Now displaying child${now}. Previously displayed child${previous}`
-            )
-          }
-          prev={(now, previous) =>
-            console.log(
-              `Prev User Callback: Now displaying child${now}. Previously displayed child${previous}`
-            )
-          }
-          onChange={(now, previous) =>
-            console.log(
-              `OnChange User Callback: Now displaying child${now}. Previously displayed child${previous}`
-            )
-          }
         >
           {items.map((item, index) => {
             return (
