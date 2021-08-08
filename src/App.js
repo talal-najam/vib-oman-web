@@ -5,6 +5,7 @@ import {
   ProductsPage,
   BrandsPage,
   LeaderboardsPage,
+  RecordFormPage,
 } from "./pages/";
 import { createTheme, ThemeProvider } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -19,8 +20,12 @@ import "./index.css";
 const darkTheme = createTheme({
   palette: {
     primary: {
-      main: '#024755',
-      light: '#0497b5'
+      main: "#024755",
+      light: "#0497b5",
+    },
+    secondary: {
+      main: '#566C95',
+      light: '#ffffff'
     },
     type: "dark",
     background: {
@@ -58,6 +63,15 @@ function App() {
               </Route>
               <Route path="/admin" exact>
                 <AdminPage />
+              </Route>
+              <Route path="/products/create" exact>
+                <RecordFormPage type="products" />
+              </Route>
+              <Route path="/brands/create" exact>
+                <RecordFormPage type="brands" />
+              </Route>
+              <Route path="/categories/create" exact>
+                <RecordFormPage type="categories" />
               </Route>
             </Switch>
           </Router>

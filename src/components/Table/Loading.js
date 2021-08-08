@@ -16,7 +16,7 @@ export default function TableLoading() {
 
   return (
     <div className={classes.root}>
-      <CircularProgress color="white"/>
+      <CircularProgress color="secondary"/>
     </div>
   );
 }

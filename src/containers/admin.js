@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import {
   Container,
@@ -6,28 +6,16 @@ import {
   Divider,
   Button,
   Toolbar,
-  makeStyles
 } from "@material-ui/core";
-import { Table, Select } from "../components";
+import { Select } from "../components";
 import { getBrands, getProducts, getCategories } from "../actions";
 import ProductsTable from "../components/Product/ProductsTable";
 import BrandsTable from "../components/Brands/BrandsTable";
 import CategoriesTable from "../components/Categories/CategoriesTable";
-
-const useStyles = makeStyles((theme) => ({
-  button: {
-    marginLeft: '1rem'
-  },
-}));
-
-const choices = ["Brands", "Products", "Categories"];
+import constants from "../utils/constants";
 
 const AdminContainer = ({ products, brands, onGetBrands, onGetProducts }) => {
-  const [selection, setSelection] = useState("Brands");
-  const [rows, setRows] = useState([]);
-
-  const classes = useStyles();
-
+  const [selection, setSelection] = useState("Categories");
 
   let resultTable;
 
@@ -45,13 +33,10 @@ const AdminContainer = ({ products, brands, onGetBrands, onGetProducts }) => {
       <Divider />
       <Toolbar disableGutters>
         <Select
-          choices={choices}
+          choices={constants.ADMIN_TAB_CHOICES}
           selection={selection}
           setSelection={setSelection}
         />
-        <Button variant="contained" className={classes.button} color="primary">
-          Create
-        </Button>
       </Toolbar>
 
       {resultTable}
