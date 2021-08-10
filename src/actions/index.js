@@ -1,5 +1,6 @@
 // import querystring from "querystring";
 import action from "./action";
+import postAction from "./postAction";
 // import { langs } from "../lang";
 // import transformProducts from './transformProducts'
 
@@ -13,6 +14,15 @@ export const getBrands = () =>
   action("brands", REACT_APP_API_HOST, "api/brands");
 export const getCategories = () =>
   action("categories", REACT_APP_API_HOST, "api/categories");
+
+export const addProduct = () =>
+  postAction("products", REACT_APP_API_HOST, "api/products");
+
+export const addCategory = () =>
+  postAction("products", REACT_APP_API_HOST, "api/products");
+
+export const addBrand = () =>
+  postAction("products", REACT_APP_API_HOST, "api/products");
 
 // export const getStrings = () => async (dispatch) => {
 //   const getLang = lang => langs.find(item => item.value === lang);

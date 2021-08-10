@@ -1,12 +1,12 @@
 import React from "react";
 import { Header } from "../components";
-import { Product } from "../components/Product";
+import Leaderboard from "../components/Leaderboards/leaderboard";
 
 export default function LeaderBoardsPage() {
   return (
     <Header>
       <div style={{ margin: "20px" }}>
-        <Product />
+        <Leaderboard />
       </div>
     </Header>
   );

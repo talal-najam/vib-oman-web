@@ -38,7 +38,6 @@ export default function ButtonAppBar({ children, particles }) {
   const classes = useStyles();
 
   const location = useLocation();
-  console.log("location is", location.pathname);
   return (
     <div className={classes.root}>
       {particles && <Particles />}
