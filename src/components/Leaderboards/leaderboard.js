@@ -9,26 +9,25 @@ const compareRanks = (array) => {
 const Leaderboard = () => {
   const [data, setData] = useState([]);
 
-    useEffect(() => {
-      // setData(
-      const baseURL = "https://api.opendota.com/api/players/";
+  useEffect(() => {
+    const baseURL = "https://api.opendota.com/api/players/";
 
-      Promise.all(
-        steamIds.map((id) =>
-          fetch(baseURL + id)
-            .then((json) => json.json())
-            .then((res) => ({
-              name: res.profile.personaname,
-              mmr: res.competitive_rank,
-              countryCode: res.profile.loccountrycode,
-            }))
-            .catch((err) => console.log("something bad happened", err))
-        )
-      ).then((data) => {
-        const result = compareRanks(data);
-        setData(result);
-      });
-    }, []);
+    Promise.all(
+      steamIds.map((id) =>
+        fetch(baseURL + id)
+          .then((json) => json.json())
+          .then((res) => ({
+            name: res.profile.personaname,
+            mmr: res.competitive_rank,
+            countryCode: res.profile.loccountrycode,
+          }))
+          .catch((err) => console.log("something bad happened", err))
+      )
+    ).then((data) => {
+      const result = compareRanks(data);
+      setData(result);
+    });
+  }, []);
 
   return (
     <>

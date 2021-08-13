@@ -6,9 +6,11 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import { makeStyles } from "@material-ui/core";
-import { addProduct} from '../../actions';
+import { addRecord } from "../../actions";
 import { useForm } from "react-hook-form";
 import CustomTextField from "./CustomTextField";
+import { connect } from "react-redux";
+import CustomCheckBox from "./CustomCheckBox";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -19,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ProductModal = ({ open, handleClose, title }) => {
+const ProductModal = ({ open, handleClose, title, addRecord }) => {
   const classes = useStyles();
 
   const {
@@ -28,9 +30,12 @@ const ProductModal = ({ open, handleClose, title }) => {
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
-    console.log(data)
-    const validatedData = data; //TODO: Add form validation
-    addProduct(validatedData);
+    console.log("form data", data);
+    if (data && data.unit_count) {
+      data.unit_count = parseInt(data.unit_count);
+    }
+    const validatedData = data;
+    addRecord('products', validatedData);
   };
 
   return (
@@ -74,7 +79,7 @@ const ProductModal = ({ open, handleClose, title }) => {
           />
 
           <CustomTextField
-            name="unit_price"
+            name="unitPrice"
             label="Unit price"
             type="number"
             control={control}
@@ -89,7 +94,7 @@ const ProductModal = ({ open, handleClose, title }) => {
             placeholder="Alt price of a single product unit"
           />
           <CustomTextField
-            name="unit_count"
+            name="unitCount"
             label="Unit count"
             type="number"
             control={control}
@@ -108,11 +113,15 @@ const ProductModal = ({ open, handleClose, title }) => {
             control={control}
             placeholder="Description of the product"
           />
-          <CustomTextField
-            name="featured"
+          <CustomCheckBox
+            name="isActive"
+            label="Is Active?"
+            control={control}
+          />
+          <CustomCheckBox
+            name="isFeatured"
             label="Featured"
             control={control}
-            placeholder="Is this a Featured product?"
           />
           <CustomTextField
             name="brand"
@@ -126,7 +135,7 @@ const ProductModal = ({ open, handleClose, title }) => {
             Cancel
           </Button>
           <Button
-            onClick={handleClose}
+            onClick={handleSubmit}
             type="submit"
             variant="contained"
             color="secondary"
@@ -139,4 +148,13 @@ const ProductModal = ({ open, handleClose, title }) => {
   );
 };
 
-export default ProductModal;
+const mapStateToProps = (state) => ({
+  products: state.app.products.data,
+  isLoading: state.app.products.loading,
+});
+
+const mapDispatchToProps = {
+  addRecord: addRecord,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProductModal);

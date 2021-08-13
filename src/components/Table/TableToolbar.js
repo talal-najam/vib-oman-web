@@ -10,7 +10,9 @@ import AddBoxIcon from "@material-ui/icons/AddBox";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
 import FilterListIcon from "@material-ui/icons/FilterList";
-import ProductModal from "./ProductModal";
+import ProductModal from "./ProductModalForm";
+import BrandModalForm from "./BrandModalForm";
+import CategoryModalForm from "./CategoryModalForm";
 
 const useToolbarStyles = makeStyles((theme) => ({
   root: {
@@ -39,6 +41,7 @@ const EnhancedTableToolbar = (props) => {
   const [showEdit, setShowEdit] = useState(false);
   const [showDelete, setShowDelete] = useState(false);
   const [showFilter, setShowFilter] = useState(false);
+  console.log("heading", heading);
 
   const handleCreateClickOpen = () => {
     setShowCreate(true);
@@ -104,13 +107,24 @@ const EnhancedTableToolbar = (props) => {
             <AddBoxIcon />
           </IconButton>
         </Tooltip>
-        <ProductModal handleClose={handleCreateClose} open={showCreate} />
+        <ProductModal
+          handleClose={handleCreateClose}
+          open={heading === "Products" && showCreate}
+        />
+        <BrandModalForm
+          handleClose={handleCreateClose}
+          open={heading === "Brands" && showCreate}
+        />
+        <CategoryModalForm
+          handleClose={handleCreateClose}
+          open={heading === "Categories" && showCreate}
+        />
         <Tooltip title="Edit">
           <IconButton disabled={!(numSelected === 1)} aria-label="edit">
             <EditIcon />
           </IconButton>
         </Tooltip>
-        <ProductModal handleClose={handleCreateClose} open={showCreate} />
+        {/* <ProductModal handleClose={handleCreateClose} open={showCreate} /> */}
 
         <Tooltip title="Delete">
           <IconButton disabled={numSelected === 0} aria-label="delete">
