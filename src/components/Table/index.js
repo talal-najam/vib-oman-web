@@ -1,3 +1,3 @@
-import Table from './Table';
+import Table from './InventoryTable';
 
 export default Table;

@@ -1,20 +1,12 @@
 import React, { useState } from "react";
-import { connect } from "react-redux";
-import {
-  Container,
-  Typography,
-  Divider,
-  Button,
-  Toolbar,
-} from "@material-ui/core";
+import { Container, Typography, Divider, Toolbar } from "@material-ui/core";
 import { Select } from "../components";
-import { getBrands, getProducts, getCategories } from "../actions";
 import ProductsTable from "../components/Product/ProductsTable";
 import BrandsTable from "../components/Brands/BrandsTable";
 import CategoriesTable from "../components/Categories/CategoriesTable";
 import constants from "../utils/constants";
 
-const AdminContainer = ({ products, brands, onGetBrands, onGetProducts }) => {
+const AdminContainer = () => {
   const [selection, setSelection] = useState("Categories");
 
   let resultTable;
@@ -38,22 +30,9 @@ const AdminContainer = ({ products, brands, onGetBrands, onGetProducts }) => {
           setSelection={setSelection}
         />
       </Toolbar>
-
       {resultTable}
     </Container>
   );
 };
 
-const mapStateToProps = (state) => ({
-  products: state.app.products.data,
-  brands: state.app.brands.data,
-  categories: state.app.categories.data,
-});
-
-const mapDispatchToProps = {
-  onGetProducts: getProducts,
-  onGetBrands: getBrands,
-  onGetCategories: getCategories,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(AdminContainer);
+export default AdminContainer;
