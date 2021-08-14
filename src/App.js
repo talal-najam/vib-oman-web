@@ -5,11 +5,12 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import { BrowserRouter as Router } from "react-router-dom";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
-import store from "./store";
 import { createBrowserHistory } from "history";
+
 import { getBrands, getCategories } from "./actions";
 import "./index.css";
 import Routes from "./routes";
+import store from "./store";
 import theme from "./theme";
 
 const history = createBrowserHistory();

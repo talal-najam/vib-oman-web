@@ -10,7 +10,7 @@ const Leaderboard = () => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    const baseURL = "https://api.opendota.com/api/players/";
+    const baseURL = `${process.env.REACT_APP_OPEN_DOTA_API}/api/players/`;
 
     Promise.all(
       steamIds.map((id) =>
