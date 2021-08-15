@@ -30,7 +30,6 @@ const ProductModal = ({ open, handleClose, title, addRecord }) => {
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
-    console.log("form data", data);
     if (data && data.unit_count) {
       data.unit_count = parseInt(data.unit_count);
     }

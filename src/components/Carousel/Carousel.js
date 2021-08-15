@@ -2,7 +2,8 @@ import React from "react";
 import Carousel from "react-material-ui-carousel";
 import autoBind from "auto-bind";
 import "./carousel.css";
-import { Box } from "@material-ui/core";
+import { Box, ButtonBase } from "@material-ui/core";
+import { Link } from "react-router-dom";
 
 import {
   Card,
@@ -28,7 +29,12 @@ function Banner(props) {
 
         <Typography className="Caption">{props.item.Caption}</Typography>
         <Box justifyContent="flex-end">
-          <Button variant="outlined" className="ViewButton">
+          <Button
+            variant="outlined"
+            component={Link}
+            to={props.item.destinationPath}
+            className="ViewButton"
+          >
             {props.item.Button}
           </Button>
         </Box>
@@ -41,9 +47,20 @@ function Banner(props) {
 
     const media = (
       <Grid item xs={12 / totalItems} key={item.Name}>
-        <CardMedia className="Media" image={item.Image} title={item.Name}>
-          <Typography className="MediaCaption">{item.Name}</Typography>
-        </CardMedia>
+        <ButtonBase
+          style={{
+            width: "100%",
+            height: "100%",
+            display: "block",
+            textAlign: "initial",
+          }}
+          component={Link}
+          to={`/products`}
+        >
+          <CardMedia className="Media" image={item.Image} title={item.Name}>
+            <Typography className="MediaCaption">{item.Name}</Typography>
+          </CardMedia>
+        </ButtonBase>
       </Grid>
     );
 
@@ -72,6 +89,7 @@ export const items = [
     Name: "Latest Deals!",
     Caption: "Premium Products - Best Prices!",
     Button: "Shop Now",
+    destinationPath: "/products",
     contentPosition: "right",
     Items: [
       {
@@ -90,6 +108,7 @@ export const items = [
     Name: "The Ultimate Gaming Zone",
     Caption: "Game in our modern lounges across Oman",
     Button: "View More",
+    destinationPath: "/admin",
     contentPosition: "middle",
     Items: [
       {
@@ -108,6 +127,7 @@ export const items = [
     Name: "Join the Community",
     Caption: "Sign up now and interact with gamers from across Oman",
     Button: "Sign Up",
+    destinationPath: "/leaderboards",
     contentPosition: "left",
     Items: [
       {

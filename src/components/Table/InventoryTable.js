@@ -28,8 +28,6 @@ function descendingComparator(a, b, orderBy) {
 function renderCell(row, col) {
   let result = "";
 
-  console.log("col");
-
   result = row[col.id];
 
   if (col.type === "time") {
@@ -48,7 +46,13 @@ function getComparator(order, orderBy) {
 }
 
 function stableSort(array, comparator) {
-  const stabilizedThis = array.map((el, index) => [el, index]);
+  /**
+   * render where redux still has paginated results because products page
+   * is using server side pagination and admin page is using client side
+   *  */
+  let holder = array.results ? array.results : array;
+
+  const stabilizedThis = holder.map((el, index) => [el, index]);
   stabilizedThis.sort((a, b) => {
     const order = comparator(a[0], b[0]);
     if (order !== 0) return order;
@@ -148,11 +152,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function EnhancedTable({ rows, heading, columns, loading }) {
-  console.log("rows are", rows);
   const classes = useStyles();
   const [order, setOrder] = React.useState("asc");
   const [orderBy, setOrderBy] = React.useState("calories");
   const [selected, setSelected] = React.useState([]);
+  const [idsSelected, setIdsSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
@@ -166,30 +170,43 @@ function EnhancedTable({ rows, heading, columns, loading }) {
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
       const newSelecteds = rows.map((n) => n.name);
+      const newSelectedIds = rows.map((n) => n.id);
       setSelected(newSelecteds);
+      setIdsSelected(newSelectedIds);
       return;
     }
     setSelected([]);
+    setIdsSelected([]);
   };
 
-  const handleClick = (event, name) => {
+  const handleClick = (event, name, id) => {
     const selectedIndex = selected.indexOf(name);
+    const idIndex = selected.indexOf(id);
     let newSelected = [];
+    let newIdSelected = [];
 
     if (selectedIndex === -1) {
       newSelected = newSelected.concat(selected, name);
+      newIdSelected = newIdSelected.concat(idsSelected, id);
     } else if (selectedIndex === 0) {
       newSelected = newSelected.concat(selected.slice(1));
+      newIdSelected = newIdSelected.concat(idsSelected.slice(1));
     } else if (selectedIndex === selected.length - 1) {
       newSelected = newSelected.concat(selected.slice(0, -1));
+      newIdSelected = newIdSelected.concat(idsSelected.slice(0, -1));
     } else if (selectedIndex > 0) {
       newSelected = newSelected.concat(
         selected.slice(0, selectedIndex),
         selected.slice(selectedIndex + 1)
       );
+      newIdSelected = newIdSelected.concat(
+        idsSelected.slice(0, idIndex),
+        idsSelected.slice(idIndex + 1)
+      );
     }
 
     setSelected(newSelected);
+    setIdsSelected(newIdSelected);
   };
 
   const handleChangePage = (event, newPage) => {
@@ -213,7 +230,11 @@ function EnhancedTable({ rows, heading, columns, loading }) {
           <TableLoading />
         ) : (
           <>
-            <TableToolbar numSelected={selected.length} heading={heading} />
+            <TableToolbar
+              idsSelected={idsSelected}
+              numSelected={selected.length}
+              heading={heading}
+            />
             <TableContainer>
               <Table
                 className={classes.table}
@@ -241,7 +262,9 @@ function EnhancedTable({ rows, heading, columns, loading }) {
                       return (
                         <TableRow
                           hover
-                          onClick={(event) => handleClick(event, row.name)}
+                          onClick={(event) =>
+                            handleClick(event, row.name, row.id)
+                          }
                           role="checkbox"
                           aria-checked={isItemSelected}
                           tabIndex={-1}

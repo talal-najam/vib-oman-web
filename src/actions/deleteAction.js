@@ -1,11 +1,14 @@
 import { getRecords } from "./index.js";
+
 import { requestStart, requestOk, requestError } from "./requestMethods";
 
-export const postAction = (type, host, body) => (dispatch) => {
+export const deleteAction = (type, host, ids) => (dispatch) => {
   dispatch(requestStart());
-  const url = `${host}/api/${type}`;
+  const url = `${host}/api/${type}/deleteMany`;
+  const body = { ids };
+
   return fetch(url, {
-    method: "post",
+    method: "delete",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
@@ -13,8 +16,8 @@ export const postAction = (type, host, body) => (dispatch) => {
     body: JSON.stringify(body),
   })
     .then((res) => res.json())
-    .then((json) => {
-      dispatch(getRecords(type));
+    .then(async (json) => {
+      await dispatch(getRecords(type));
       return dispatch(requestOk());
     })
     .catch((err) => dispatch(requestError(err)));

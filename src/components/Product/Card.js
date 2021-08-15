@@ -14,20 +14,26 @@ import { red } from "@material-ui/core/colors";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import ShareIcon from "@material-ui/icons/Share";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import { ButtonBase } from "@material-ui/core";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     // maxWidth: 345,
     maxWidth: 500,
-    background: 'hsla(189, 95%, 7%, 1)',
+    background: "hsla(189, 95%, 7%, 1)",
 
-    background: 'linear-gradient(90deg, hsla(189, 95%, 7%, 1) 0%, hsla(191, 94%, 7%, 1) 100%)',
-    
-    background: '-moz-linear-gradient(90deg, hsla(189, 95%, 7%, 1) 0%, hsla(191, 94%, 7%, 1) 100%)',
-    
-    background: '-webkit-linear-gradient(90deg, hsla(189, 95%, 7%, 1) 0%, hsla(191, 94%, 7%, 1) 100%)',
-    
-    filter: 'progid: DXImageTransform.Microsoft.gradient( startColorstr="#011F24", endColorstr="#011C22", GradientType=1 )',
+    background:
+      "linear-gradient(90deg, hsla(189, 95%, 7%, 1) 0%, hsla(191, 94%, 7%, 1) 100%)",
+
+    background:
+      "-moz-linear-gradient(90deg, hsla(189, 95%, 7%, 1) 0%, hsla(191, 94%, 7%, 1) 100%)",
+
+    background:
+      "-webkit-linear-gradient(90deg, hsla(189, 95%, 7%, 1) 0%, hsla(191, 94%, 7%, 1) 100%)",
+
+    filter:
+      'progid: DXImageTransform.Microsoft.gradient( startColorstr="#011F24", endColorstr="#011C22", GradientType=1 )',
   },
   media: {
     height: 0,
@@ -46,9 +52,16 @@ const useStyles = makeStyles((theme) => ({
   brand: {
     height: "100%",
   },
+  cardButton: {
+    display: "block",
+    textAlign: "initial",
+    height: "100%",
+    width: "100%",
+  },
 }));
 
-export default function RecipeReviewCard({
+export default function ProductCard({
+  id,
   brandLogo,
   productTitle,
   created_at,
@@ -66,29 +79,36 @@ export default function RecipeReviewCard({
 
   return (
     <Card className={classes.root} square>
-      <CardHeader
-        avatar={
-          <Avatar
-            aria-label="recipe"
-            defaultValue=""
-            className={classes.avatar}
-          >
-            <img src={brandLogo} className={classes.brand} alt="Brand logo" />
-          </Avatar>
-        }
-        title={brandName && brandName.toUpperCase()}
-        subheader={productTitle}
-      />
-      <CardMedia
-        className={classes.media}
-        image={productImage}
-        title={productTitle}
-      />
-      <CardContent>
-        <Typography variant="body2" color="textSecondary" component="p">
-          {shortDescription}
-        </Typography>
-      </CardContent>
+      <ButtonBase
+        className={classes.cardButton}
+        component={Link}
+        to={`products/${id}`}
+      >
+        <CardHeader
+          avatar={
+            <Avatar
+              aria-label="recipe"
+              defaultValue=""
+              className={classes.avatar}
+            >
+              <img src={brandLogo} className={classes.brand} alt="Brand logo" />
+            </Avatar>
+          }
+          title={brandName && brandName.toUpperCase()}
+          subheader={productTitle}
+        />
+        <CardMedia
+          className={classes.media}
+          image={productImage}
+          title={productTitle}
+        />
+        <CardContent>
+          <Typography variant="body2" color="textSecondary" component="p">
+            {shortDescription}
+          </Typography>
+        </CardContent>
+      </ButtonBase>
+
       <CardActions disableSpacing>
         <IconButton aria-label="add to favorites">
           <FavoriteIcon />

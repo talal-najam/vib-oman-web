@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
 import clsx from "clsx";
 import { lighten, makeStyles } from "@material-ui/core/styles";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -13,6 +14,10 @@ import FilterListIcon from "@material-ui/icons/FilterList";
 import ProductModal from "./ProductModalForm";
 import BrandModalForm from "./BrandModalForm";
 import CategoryModalForm from "./CategoryModalForm";
+import { deleteRecords } from "../../actions";
+
+// TODO: Check why the name is messing up pagination
+//       probably because it's being used as uid
 
 const useToolbarStyles = makeStyles((theme) => ({
   root: {
@@ -34,14 +39,16 @@ const useToolbarStyles = makeStyles((theme) => ({
   },
 }));
 
-const EnhancedTableToolbar = (props) => {
+const EnhancedTableToolbar = ({
+  numSelected,
+  heading,
+  idsSelected,
+  deleteRecords,
+}) => {
   const classes = useToolbarStyles();
-  const { numSelected, heading } = props;
   const [showCreate, setShowCreate] = useState(false);
   const [showEdit, setShowEdit] = useState(false);
-  const [showDelete, setShowDelete] = useState(false);
   const [showFilter, setShowFilter] = useState(false);
-  console.log("heading", heading);
 
   const handleCreateClickOpen = () => {
     setShowCreate(true);
@@ -59,12 +66,15 @@ const EnhancedTableToolbar = (props) => {
     setShowEdit(false);
   };
 
-  const handleDeleteClickOpen = () => {
-    setShowDelete(true);
-  };
-
-  const handleDeleteClose = () => {
-    setShowDelete(false);
+  const handleDelete = (e, idsSelected) => {
+    e.preventDefault();
+    const confirmed = window.confirm(
+      "Are you sure you want these items to be deleted?"
+    );
+    if (confirmed) {
+      console.log("ids to be deleted", idsSelected);
+      deleteRecords(heading, idsSelected);
+    }
   };
 
   const handleFilterClickOpen = () => {
@@ -127,7 +137,11 @@ const EnhancedTableToolbar = (props) => {
         {/* <ProductModal handleClose={handleCreateClose} open={showCreate} /> */}
 
         <Tooltip title="Delete">
-          <IconButton disabled={numSelected === 0} aria-label="delete">
+          <IconButton
+            onClick={(e) => handleDelete(e, idsSelected)}
+            disabled={numSelected === 0}
+            aria-label="delete"
+          >
             <DeleteIcon />
           </IconButton>
         </Tooltip>
@@ -148,4 +162,16 @@ EnhancedTableToolbar.propTypes = {
   heading: PropTypes.string.isRequired,
 };
 
-export default EnhancedTableToolbar;
+const mapStateToProps = (state) => ({
+  products: state.app.products.data,
+  isLoading: state.app.products.loading,
+});
+
+const mapDispatchToProps = {
+  deleteRecords: deleteRecords,
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(EnhancedTableToolbar);

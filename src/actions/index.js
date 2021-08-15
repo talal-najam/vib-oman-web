@@ -1,9 +1,10 @@
 // import querystring from "querystring";
 import action from "./action";
 import { postAction } from "./postRequest";
+import { deleteAction } from "./deleteAction";
 
-export const getProducts = () =>
-  action("products", process.env.REACT_APP_API_HOST, "api/products");
+export const getProducts = (params) =>
+  action("products", process.env.REACT_APP_API_HOST, "api/products", params);
 export const getBrands = () =>
   action("brands", process.env.REACT_APP_API_HOST, "api/brands");
 export const getCategories = () =>
@@ -14,3 +15,6 @@ export const getRecords = (type) =>
 
 export const addRecord = (type, body) =>
   postAction(type, process.env.REACT_APP_API_HOST, body);
+
+export const deleteRecords = (type, ids) =>
+  deleteAction(type, process.env.REACT_APP_API_HOST, ids);

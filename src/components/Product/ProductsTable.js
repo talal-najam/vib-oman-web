@@ -5,7 +5,7 @@ import { Table } from "../index";
 
 const ProductsTable = ({ onGetProducts, products, selection, isLoading }) => {
   useEffect(() => {
-    onGetProducts();
+    onGetProducts({ pagination: false });
   }, [selection]);
 
   const columns = [
@@ -43,7 +43,9 @@ const ProductsTable = ({ onGetProducts, products, selection, isLoading }) => {
       {isLoading ? (
         <>Loading</>
       ) : (
-        <Table rows={products} columns={columns} heading={selection} />
+        products && (
+          <Table rows={products} columns={columns} heading={selection} />
+        )
       )}
     </>
   );

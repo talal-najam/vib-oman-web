@@ -1,9 +1,11 @@
+import React, { useEffect, useState } from "react";
 import { Container, Grid } from "@material-ui/core";
-import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import ProductCard from "./Card";
 import { getProducts } from "../../actions";
 import Skeleton from "../Skeleton";
+import Pagination from "../Pagination";
+import { Link } from "react-router-dom";
 
 const getBrandNameById = (id, brands) => {
   if (brands && brands.length > 0) {
@@ -25,10 +27,12 @@ const getBrandLogoById = (id, brands) => {
   }
 };
 
-const Product = ({ onGetProducts, products, loading, brands }) => {
+const Product = ({ onGetProducts, products, totalPages, loading, brands }) => {
+  const [page, setPage] = useState(1);
+
   useEffect(() => {
-    onGetProducts();
-  }, []);
+    onGetProducts({ pagination: true, page: page - 1 });
+  }, [page]);
 
   return (
     <div>
@@ -37,21 +41,35 @@ const Product = ({ onGetProducts, products, loading, brands }) => {
           {loading ? (
             <Skeleton />
           ) : (
+            products &&
             products.map((product) => (
               <Grid item lg={4}>
-                <ProductCard
-                  key={product.id}
-                  brandName={getBrandNameById(product.brand_id, brands)}
-                  brandLogo={getBrandLogoById(product.brand_id, brands)}
-                  productTitle={product.name}
-                  created_at={new Date(product.created_at)}
-                  productImage={product.large_image}
-                  shortDescription={product.short_description}
-                  description={product.description}
-                />
+                {/* <Link> */}
+                  <ProductCard
+                    key={product.id}
+                    id={product.id}
+                    brandName={getBrandNameById(product.brand_id, brands)}
+                    brandLogo={getBrandLogoById(product.brand_id, brands)}
+                    productTitle={product.name}
+                    created_at={new Date(product.created_at)}
+                    productImage={product.large_image}
+                    shortDescription={product.short_description}
+                    description={product.description}
+                  />
+                {/* </Link> */}
               </Grid>
             ))
           )}
+        </Grid>
+        <Grid
+          container
+          justifyContent="center"
+          alignItems="center"
+          style={{ padding: "5rem 0" }}
+        >
+          <Grid item>
+            <Pagination page={page} setPage={setPage} totalPages={totalPages} />
+          </Grid>
         </Grid>
       </Container>
     </div>
@@ -59,7 +77,8 @@ const Product = ({ onGetProducts, products, loading, brands }) => {
 };
 
 const mapStateToProps = (state) => ({
-  products: state.app.products.data,
+  products: state.app.products.data.results,
+  totalPages: state.app.products.data.totalPages,
   loading: state.app.products.loading,
   brands: state.app.brands.data,
 });

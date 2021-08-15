@@ -26,6 +26,9 @@ const Routes = () => (
     <Route path="/admin" exact>
       <AdminPage />
     </Route>
+    <Route path="/products/:id" exact>
+      <ProductsPage />
+    </Route>
     <Route path="/products/create" exact>
       <RecordFormPage type="products" />
     </Route>
