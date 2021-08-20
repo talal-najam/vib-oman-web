@@ -10,10 +10,10 @@ export function JumbotronContainer() {
     <Jumbotron.Container>
       {jumboData.map((item, index) => (
         <ScrollAnimation
-          // animateIn={isEven(index) ? "fadeIn" : "fadeIn"}
-          animateIn={isEven(index) ? "bounceInRight" : "bounceInLeft"}
+          animateIn={isEven(index) ? "fadeIn" : "fadeIn"}
+          // animateIn={isEven(index) ? "bounceInRight" : "bounceInLeft"}
           animateOnce
-          duration={1.5}
+          duration={2}
         >
           <Jumbotron key={item.id} direction={item.direction}>
             <Jumbotron.Pane>

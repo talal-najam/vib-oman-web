@@ -1,6 +1,6 @@
 import { getRecords } from "./index.js";
 
-import { requestStart, requestOk, requestError } from "./requestMethods";
+import { requestStart, requestOk, requestError, deleteOk } from "./requestMethods";
 
 export const deleteAction = (type, host, ids) => (dispatch) => {
   dispatch(requestStart());
@@ -18,6 +18,7 @@ export const deleteAction = (type, host, ids) => (dispatch) => {
     .then((res) => res.json())
     .then(async (json) => {
       await dispatch(getRecords(type));
+      dispatch(deleteOk(type, ids));
       return dispatch(requestOk());
     })
     .catch((err) => dispatch(requestError(err)));

@@ -31,6 +31,11 @@ const reducer =
           ...state,
           query: action.query,
         };
+      case `DELETE/${type}`:
+        return {
+          ...state,
+          data: state.data.filter((el) => !action.payload.ids.includes(el.id)),
+        };
       default:
         return state;
     }

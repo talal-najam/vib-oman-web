@@ -233,6 +233,8 @@ function EnhancedTable({ rows, heading, columns, loading }) {
             <TableToolbar
               idsSelected={idsSelected}
               numSelected={selected.length}
+              setSelected={setSelected}
+              setIdsSelected={setIdsSelected}
               heading={heading}
             />
             <TableContainer>

@@ -44,6 +44,8 @@ const EnhancedTableToolbar = ({
   heading,
   idsSelected,
   deleteRecords,
+  setIdsSelected,
+  setSelected,
 }) => {
   const classes = useToolbarStyles();
   const [showCreate, setShowCreate] = useState(false);
@@ -72,8 +74,9 @@ const EnhancedTableToolbar = ({
       "Are you sure you want these items to be deleted?"
     );
     if (confirmed) {
-      console.log("ids to be deleted", idsSelected);
       deleteRecords(heading, idsSelected);
+      setIdsSelected([]);
+      setSelected([]);
     }
   };
 

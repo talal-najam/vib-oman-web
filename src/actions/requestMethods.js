@@ -14,3 +14,8 @@ export const requestError = (error) => ({
 export const requestOk = () => ({
   type: OK,
 });
+
+export const deleteOk = (type, ids) => ({
+  type: `DELETE/${type.toLowerCase()}`,
+  payload: { type, ids },
+});
