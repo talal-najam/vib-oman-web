@@ -5,6 +5,8 @@ import { deleteAction } from "./deleteAction";
 
 export const getProducts = (params) =>
   action("products", process.env.REACT_APP_API_HOST, "api/products", params);
+export const getProduct = (id, params) =>
+  action("product", process.env.REACT_APP_API_HOST, `api/products/${id}`);
 export const getBrands = () =>
   action("brands", process.env.REACT_APP_API_HOST, "api/brands");
 export const getCategories = () =>

@@ -3,12 +3,10 @@ import { makeStyles } from "@material-ui/core/styles";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
-import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
-import { Divider } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import Particles from "./Particle";
+import Drawer from "../Drawer";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -34,6 +32,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+
+
 export default function ButtonAppBar({ children, particles }) {
   const classes = useStyles();
 
@@ -42,14 +42,7 @@ export default function ButtonAppBar({ children, particles }) {
     <div className={classes.root}>
       {particles && <Particles />}
       <Toolbar>
-        <IconButton
-          edge="start"
-          className={classes.menuButton}
-          color="inherit"
-          aria-label="menu"
-        >
-          <MenuIcon />
-        </IconButton>
+        <Drawer iconStyle={classes.menuButton} />
         <Typography variant="h6" className={classes.title}>
           <Link to="/" className={classes.link}>
             VIB ESports Oman
@@ -76,7 +69,6 @@ export default function ButtonAppBar({ children, particles }) {
           </Link>
         </Button>
       </Toolbar>
-      <Divider />
 
       {children}
       {location.pathname === "/" && (

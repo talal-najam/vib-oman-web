@@ -1,8 +1,9 @@
 import React from "react";
 import { Header } from "../components";
-import { Product } from "../components/Product";
+import { ProductsList } from "../components";
 import { FooterContainer } from "../containers";
-import { useParams } from 'react-router-dom';
+import { useParams } from "react-router-dom";
+import { SingleProduct } from "../components";
 
 export default function ProductsPage({ match }) {
   const { id } = useParams();
@@ -10,10 +11,10 @@ export default function ProductsPage({ match }) {
     <>
       <Header>
         {id ? (
-          <p>Hello World</p>
+          <SingleProduct productId={id} />
         ) : (
           <div style={{ margin: "20px" }}>
-            <Product />
+            <ProductsList />
           </div>
         )}
       </Header>

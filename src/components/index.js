@@ -6,3 +6,6 @@ export { default as Accordion } from "./accordion";
 export { default as OptForm } from "./opt-form";
 export { default as Table } from "./Table";
 export { default as Select } from "./Select";
+export { default as SingleProduct } from "./SingleProduct";
+export { default as ProductsList } from "./Product";
+export { default as Drawer } from "./Drawer";

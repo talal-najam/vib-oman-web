@@ -1,8 +1,6 @@
 import {
-  Box,
   Container,
-  Divider,
-  makeStyles,
+  // makeStyles,
   Typography,
 } from "@material-ui/core";
 import React from "react";
@@ -10,25 +8,25 @@ import { Header, Carousel } from "../components";
 import { JumbotronContainer } from "../containers/jumbotron";
 import { FooterContainer } from "../containers";
 import { FaqsContainer } from "../containers/faqs";
-import FacebookIcon from "@material-ui/icons/Facebook";
-import InstagramIcon from "@material-ui/icons/Instagram";
-import WhatsAppIcon from "@material-ui/icons/WhatsApp";
-import MailOutlineIcon from "@material-ui/icons/MailOutline";
+// import FacebookIcon from "@material-ui/icons/Facebook";
+// import InstagramIcon from "@material-ui/icons/Instagram";
+// import WhatsAppIcon from "@material-ui/icons/WhatsApp";
+// import MailOutlineIcon from "@material-ui/icons/MailOutline";
 
-const useStyles = makeStyles({
-  social: {
-    textDecoration: "none",
-    color: "#c3c3c3",
-    paddingRight: "3rem",
-  },
-  root: {
-    textAlign: "center",
-    justifyContent: "center",
-  },
-});
+// const useStyles = makeStyles({
+//   social: {
+//     textDecoration: "none",
+//     color: "#c3c3c3",
+//     paddingRight: "3rem",
+//   },
+//   root: {
+//     textAlign: "center",
+//     justifyContent: "center",
+//   },
+// });
 
 export default function HomePage() {
-  const classes = useStyles();
+  // const classes = useStyles();
 
   return (
     <>
