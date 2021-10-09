@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import Particles from "./Particle";
 import Drawer from "../Drawer";
+import constants from "../../utils/constants";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -32,8 +33,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
-
 export default function ButtonAppBar({ children, particles }) {
   const classes = useStyles();
 
@@ -48,26 +47,13 @@ export default function ButtonAppBar({ children, particles }) {
             VIB ESports Oman
           </Link>
         </Typography>
-        <Button color="inherit">
-          <Link className={classes.link} to="/products">
-            Products
-          </Link>
-        </Button>
-        <Button color="inherit">
-          <Link className={classes.link} to="/brands">
-            Brands
-          </Link>
-        </Button>
-        <Button color="inherit">
-          <Link className={classes.link} to="/leaderboards">
-            Leaderboards
-          </Link>
-        </Button>
-        <Button color="inherit">
-          <Link className={classes.link} to="/admin">
-            Admin
-          </Link>
-        </Button>
+        {constants.PAGES.map((page, index) => (
+          page.active && <Button color="inherit" key={index}>
+            <Link className={classes.link} to={page.route}>
+              {page.label}
+            </Link>
+          </Button>
+        ))}
       </Toolbar>
 
       {children}
