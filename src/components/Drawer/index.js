@@ -38,9 +38,23 @@ export default function SwipeableTemporaryDrawer({ iconStyle }) {
       onClick={toggleDrawer(false)}
       onKeyDown={toggleDrawer(false)}
     >
+      {/* <List>
+
       <Box p={2}>
-        <Typography align="center">VIP Esports Oman</Typography>
+        <ListItem button  component={Link} to="/">
+                <Typography align="center">VIP Esports Oman</Typography>
+              </ListItem>
       </Box>
+      </List> */}
+
+      <List>
+        <ListItem button component={Link} to="/">
+          <ListItemText>
+            <Typography align="center">VIP Esports Oman</Typography>
+          </ListItemText>
+        </ListItem>
+      </List>
+
       <Divider />
       <List>
         {NAV_LINKS.map(
