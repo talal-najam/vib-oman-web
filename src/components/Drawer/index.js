@@ -1,4 +1,5 @@
 import * as React from "react";
+import { Link } from "react-router-dom";
 import Box from "@mui/material/Box";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
 import List from "@mui/material/List";
@@ -10,6 +11,10 @@ import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
+import Typography from "@material-ui/core/Typography";
+import constants from "../../utils/constants";
+
+const { NAV_LINKS } = constants;
 
 export default function SwipeableTemporaryDrawer({ iconStyle }) {
   const [isOpen, setIsOpen] = React.useState(false);
@@ -33,26 +38,34 @@ export default function SwipeableTemporaryDrawer({ iconStyle }) {
       onClick={toggleDrawer(false)}
       onKeyDown={toggleDrawer(false)}
     >
+      <Box p={2}>
+        <Typography align="center">VIP Esports Oman</Typography>
+      </Box>
+      <Divider />
       <List>
-        {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
+        {NAV_LINKS.map(
+          (navObj, index) =>
+            navObj.active &&
+            !navObj.adminOnly && (
+              <ListItem button key={index} component={Link} to={navObj.route}>
+                <ListItemIcon>{navObj.icon}</ListItemIcon>
+                <ListItemText primary={navObj.label} />
+              </ListItem>
+            )
+        )}
       </List>
       <Divider />
       <List>
-        {["All mail", "Trash", "Spam"].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
+        {NAV_LINKS.map(
+          (navObj, index) =>
+            navObj.active &&
+            navObj.adminOnly && (
+              <ListItem button key={index} component={Link} to={navObj.route}>
+                <ListItemIcon>{navObj.icon}</ListItemIcon>
+                <ListItemText primary={navObj.label} />
+              </ListItem>
+            )
+        )}
       </List>
     </Box>
   );

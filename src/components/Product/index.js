@@ -7,7 +7,7 @@ import Skeleton from "../Skeleton";
 import Pagination from "../Pagination";
 import { Link } from "react-router-dom";
 
-const getBrandNameById = (id, brands) => {
+export const getBrandNameById = (id, brands) => {
   if (brands && brands.length > 0) {
     for (let i = 0; i < brands.length; i++) {
       if (brands[i].id === id) {

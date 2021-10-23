@@ -47,7 +47,7 @@ export default function ButtonAppBar({ children, particles }) {
             VIB ESports Oman
           </Link>
         </Typography>
-        {constants.PAGES.map((page, index) => (
+        {constants.NAV_LINKS.map((page, index) => (
           page.active && <Button color="inherit" key={index}>
             <Link className={classes.link} to={page.route}>
               {page.label}
