@@ -9,6 +9,7 @@ import {
   Divider,
   makeStyles,
 } from "@material-ui/core";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { getProduct, getProducts } from "../../actions";
 import Image from "material-ui-image";
@@ -17,6 +18,11 @@ import { getBrandNameById } from "../Product";
 const useStyles = makeStyles((theme) => ({
   suggestedItems: {
     backgroundColor: "rgba(100,100,100,0.2)",
+  },
+  suggestedItemContent: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between",
   },
 }));
 
@@ -70,14 +76,31 @@ const getTopThreeProducts = (products, brands, id, classes) => {
                 </Box>
               </Grid>
               <Grid item lg={8}>
-                <Box py={2} style={{ minHeight: "100%", minWidth: "100%" }}>
-                  <Typography variant="h6">
-                  {productFullname}
-                  </Typography>
-                  <InfoDivider padding={1} />
-                  <Typography variant="subtitle">
-                    {currentProduct.short_description}
-                  </Typography>
+                <Box
+                  className={classes.suggestedItemContent}
+                  py={2}
+                  style={{ minHeight: "100%", minWidth: "100%" }}
+                >
+                  <Box>
+                    <Typography variant="h6">{productFullname}</Typography>
+                    <InfoDivider padding={1} />
+                    <Typography variant="subtitle">
+                      {currentProduct.short_description}
+                    </Typography>
+                  </Box>
+                  <Box>
+                    <Typography variant="h6"></Typography>
+                  </Box>
+                  <Box pb={1}>
+                    <Button
+                      variant="outlined"
+                      component={Link}
+                      to={`/products/${currentProduct.id}`}
+                      style={{ width: "6rem", marginBottom: "-4px" }}
+                    >
+                      OMR {currentProduct.unit_price}
+                    </Button>
+                  </Box>
                 </Box>
               </Grid>
             </Grid>
@@ -142,14 +165,16 @@ const Product = ({
             </Paper>
           </Box>
         </Grid>
-    
+
         <Grid lg={12}>
-        <InfoDivider padding={8} />
+          <InfoDivider padding={8} />
           <Box>
             <Box>
               <Typography variant="h6">People also viewed:</Typography>
             </Box>
-            <Box>{getTopThreeProducts(products, brands, product.id, classes)}</Box>
+            <Box>
+              {getTopThreeProducts(products, brands, product.id, classes)}
+            </Box>
           </Box>
         </Grid>
       </Grid>
