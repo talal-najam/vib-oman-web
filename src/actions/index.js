@@ -2,6 +2,7 @@
 import action from "./action";
 import { postAction } from "./postRequest";
 import { deleteAction } from "./deleteAction";
+import { addToCartOk } from "./cartActions";
 
 export const getProducts = (params) =>
   action("products", process.env.REACT_APP_API_HOST, "api/products", params);
@@ -20,3 +21,6 @@ export const addRecord = (type, body) =>
 
 export const deleteRecords = (type, ids) =>
   deleteAction(type, process.env.REACT_APP_API_HOST, ids);
+
+// Don't like this duplicate tbh
+export const addToCart = (type, items) => addToCartOk(type, items);

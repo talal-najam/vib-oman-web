@@ -9,3 +9,4 @@ export { default as Select } from "./Select";
 export { default as SingleProduct } from "./SingleProduct";
 export { default as ProductsList } from "./Product";
 export { default as Drawer } from "./Drawer";
+export { default as Cart } from "./Cart";

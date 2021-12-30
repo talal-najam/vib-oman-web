@@ -1,4 +1,5 @@
 import React from "react";
+import { connect } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
@@ -8,6 +9,8 @@ import { useLocation } from "react-router-dom";
 import Particles from "./Particle";
 import Drawer from "../Drawer";
 import constants from "../../utils/constants";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { Badge } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -33,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ButtonAppBar({ children, particles }) {
+const ButtonAppBar = ({ children, particles, cart }) => {
   const classes = useStyles();
 
   const location = useLocation();
@@ -47,13 +50,30 @@ export default function ButtonAppBar({ children, particles }) {
             VIB ESports Oman
           </Link>
         </Typography>
-        {constants.NAV_LINKS.map((page, index) => (
-          page.active && <Button color="inherit" key={index}>
-            <Link className={classes.link} to={page.route}>
-              {page.label}
-            </Link>
+        {constants.NAV_LINKS.map(
+          (page, index) =>
+            page.active &&
+            !page.adminOnly && (
+              <Link className={classes.link} to={page.route}>
+                <Button color="inherit" key={index}>
+                  {page.label}
+                </Button>
+              </Link>
+            )
+        )}
+        <Link className={classes.link} to="/cart">
+          <Button color="inherit" style={{ height: "100%" }}>
+            {/* <div style={{ marginTop: "0.5rem" }}> */}
+            {console.log('cart is', cart.length)}
+            <Badge
+              badgeContent={cart && cart.length}
+              color="error"
+            >
+              <ShoppingCartIcon />
+            </Badge>
+            {/* </div> */}
           </Button>
-        ))}
+        </Link>
       </Toolbar>
 
       {children}
@@ -84,4 +104,10 @@ export default function ButtonAppBar({ children, particles }) {
       )}
     </div>
   );
-}
+};
+
+const mapStateToProps = (state) => ({
+  cart: state.app.cart.data,
+});
+
+export default connect(mapStateToProps)(ButtonAppBar);

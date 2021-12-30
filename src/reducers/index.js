@@ -8,6 +8,7 @@ export default combineReducers({
   brands: reducer("brands"),
   products: reducer("products"),
   product: reducer("product"),
+  cart: reducer('cart'),
   // strings: (state = {}, action) => ((action && action.type === 'strings') ? action.payload : state),
   form,
   request,

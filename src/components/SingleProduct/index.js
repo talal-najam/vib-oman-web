@@ -6,18 +6,23 @@ import {
   Box,
   Paper,
   Button,
-  Divider,
   makeStyles,
+  ButtonBase,
 } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { getProduct, getProducts } from "../../actions";
+import { addToCart, getProduct, getProducts } from "../../actions";
 import Image from "material-ui-image";
 import { getBrandNameById } from "../Product";
+import { InfoDivider } from "../Util/Divider";
 
 const useStyles = makeStyles((theme) => ({
+  cardButton: {
+    width: "100%",
+  },
   suggestedItems: {
     backgroundColor: "rgba(100,100,100,0.2)",
+    width: "100%",
   },
   suggestedItemContent: {
     display: "flex",
@@ -25,14 +30,6 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "space-between",
   },
 }));
-
-const InfoDivider = ({ padding = 2 }) => {
-  return (
-    <Box py={padding}>
-      <Divider />
-    </Box>
-  );
-};
 
 const getTopThreeProducts = (products, brands, id, classes) => {
   function randomIntFromInterval(min, max) {
@@ -62,18 +59,24 @@ const getTopThreeProducts = (products, brands, id, classes) => {
           <Paper elevation={8} className={classes.suggestedItems}>
             <Grid container>
               <Grid item lg={4}>
-                <Box p={2} style={{ minHeight: "100%", minWidth: "100%" }}>
-                  <img
-                    src={currentProduct.small_image}
-                    style={{
-                      minWidth: "100%",
-                      maxHeight: "200px",
-                      objectFit: "cover",
-                      border: "1px solid grey",
-                    }}
-                    alt={productFullname}
-                  />
-                </Box>
+                <ButtonBase
+                  className={classes.cardButton}
+                  component={Link}
+                  to={`/products/${currentProduct.id}`}
+                >
+                  <Box p={2} style={{ minHeight: "100%", minWidth: "100%" }}>
+                    <img
+                      src={currentProduct.small_image}
+                      style={{
+                        minWidth: "100%",
+                        maxHeight: "200px",
+                        objectFit: "cover",
+                        border: "1px solid grey",
+                      }}
+                      alt={productFullname}
+                    />
+                  </Box>
+                </ButtonBase>
               </Grid>
               <Grid item lg={8}>
                 <Box
@@ -115,6 +118,7 @@ const getTopThreeProducts = (products, brands, id, classes) => {
 const Product = ({
   onGetProduct,
   onGetProducts,
+  onAddToCart,
   product,
   products,
   loading,
@@ -160,7 +164,12 @@ const Product = ({
               </Box>
               <InfoDivider />
               <Box pb={2} px={4}>
-                <Button variant="contained">Add to cart</Button>
+                <Button
+                  variant="contained"
+                  onClick={() => onAddToCart("cart", product)}
+                >
+                  Add to cart
+                </Button>
               </Box>
             </Paper>
           </Box>
@@ -194,6 +203,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = {
   onGetProduct: getProduct,
   onGetProducts: getProducts,
+  onAddToCart: addToCart,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Product);

@@ -7,6 +7,7 @@ import {
   BrandsPage,
   LeaderboardsPage,
   RecordFormPage,
+  CheckoutPage,
 } from "../pages/";
 
 const Routes = () => (
@@ -37,6 +38,9 @@ const Routes = () => (
     </Route>
     <Route path="/categories/create" exact>
       <RecordFormPage type="categories" />
+    </Route>
+    <Route path="/cart" exact>
+      <CheckoutPage />
     </Route>
   </Switch>
 );

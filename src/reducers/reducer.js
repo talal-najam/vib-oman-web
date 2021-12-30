@@ -20,6 +20,12 @@ const reducer =
           data: action.payload,
           error: false,
         };
+      case `APPEND/${type}`:
+        return {
+          ...state,
+          loading: false,
+          data: [...state.data, action.payload]
+        }
       case `ERROR/${type}`:
         return {
           ...state,
