@@ -63,7 +63,6 @@ const ButtonAppBar = ({ children, particles, cart }) => {
         )}
         <Link className={classes.link} to="/cart">
           <Button color="inherit" style={{ height: "100%" }}>
-            {/* <div style={{ marginTop: "0.5rem" }}> */}
             {console.log('cart is', cart.length)}
             <Badge
               badgeContent={cart && cart.length}
@@ -71,7 +70,6 @@ const ButtonAppBar = ({ children, particles, cart }) => {
             >
               <ShoppingCartIcon />
             </Badge>
-            {/* </div> */}
           </Button>
         </Link>
       </Toolbar>
