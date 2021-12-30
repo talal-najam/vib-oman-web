@@ -22,5 +22,5 @@ export const addRecord = (type, body) =>
 export const deleteRecords = (type, ids) =>
   deleteAction(type, process.env.REACT_APP_API_HOST, ids);
 
-// Don't like this duplicate tbh
-export const addToCart = (type, items) => addToCartOk(type, items);
+// TODO: Don't like this duplicate tbh. Cleanup required here
+export const addToCart = (type, item, quantity) => addToCartOk(type, item, quantity);

@@ -63,9 +63,9 @@ const ButtonAppBar = ({ children, particles, cart }) => {
         )}
         <Link className={classes.link} to="/cart">
           <Button color="inherit" style={{ height: "100%" }}>
-            {console.log('cart is', cart.length)}
+            {console.log("cart is", cart.length)}
             <Badge
-              badgeContent={cart && cart.length}
+              badgeContent={cart && cart.reduce((total, current) => (total + current.quantity), 0)}
               color="error"
             >
               <ShoppingCartIcon />

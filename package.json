@@ -32,6 +32,7 @@
     "redux": "^4.1.0",
     "redux-responsive": "^4.3.8",
     "redux-thunk": "^2.3.0",
+    "styled-components": "^5.3.3",
     "tsparticles": "^1.35.1",
     "web-vitals": "^1.0.1"
   },

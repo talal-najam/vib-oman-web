@@ -8,6 +8,10 @@ import {
   Button,
   makeStyles,
   ButtonBase,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
 } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
@@ -15,6 +19,7 @@ import { addToCart, getProduct, getProducts } from "../../actions";
 import Image from "material-ui-image";
 import { getBrandNameById } from "../Product";
 import { InfoDivider } from "../Util/Divider";
+import constants from "../../utils/constants";
 
 const useStyles = makeStyles((theme) => ({
   cardButton: {
@@ -115,6 +120,14 @@ const getTopThreeProducts = (products, brands, id, classes) => {
   return null;
 };
 
+const menuItems = () => {
+  const result = [];
+  for (let i = 1; i <= constants.MAX_QUANTITY_LIMIT; i++) {
+    result.push(<MenuItem value={i}>{i}</MenuItem>);
+  }
+  return result;
+};
+
 const Product = ({
   onGetProduct,
   onGetProducts,
@@ -130,7 +143,15 @@ const Product = ({
     onGetProducts();
   }, [productId, onGetProduct, onGetProducts]);
 
+  const [quantity, setQuantity] = React.useState("");
+
+  const handleChange = (event) => {
+    setQuantity(event.target.value);
+  };
+
   const classes = useStyles();
+  const menuItemsOptions = menuItems();
+  console.log("menuItemOptions", menuItemsOptions);
 
   return !loading && product ? (
     <Container maxWidth="lg">
@@ -163,10 +184,26 @@ const Product = ({
                 <Typography variant="caption">{product.description}</Typography>
               </Box>
               <InfoDivider />
+              <Box pb={2} px={4} sx={{ minWidth: 120 }}>
+                <FormControl fullWidth>
+                  <InputLabel id="demo-simple-select-label">
+                    Quantity
+                  </InputLabel>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={quantity}
+                    label="Quantity"
+                    onChange={handleChange}
+                  >
+                    {menuItemsOptions}
+                  </Select>
+                </FormControl>
+              </Box>
               <Box pb={2} px={4}>
                 <Button
                   variant="contained"
-                  onClick={() => onAddToCart("cart", product)}
+                  onClick={() => onAddToCart("cart", product, quantity)}
                 >
                   Add to cart
                 </Button>

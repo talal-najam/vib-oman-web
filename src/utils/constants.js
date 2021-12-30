@@ -5,6 +5,7 @@ import LeaderboardIcon from '@mui/icons-material/Leaderboard';
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 
 const constants = {
+  MAX_QUANTITY_LIMIT: 5,
   ADMIN_TAB_CHOICES: ["Brands", "Products", "Categories"],
   NAV_LINKS: [
     {
