@@ -143,7 +143,7 @@ const Product = ({
     onGetProducts();
   }, [productId, onGetProduct, onGetProducts]);
 
-  const [quantity, setQuantity] = React.useState("");
+  const [quantity, setQuantity] = React.useState(1);
 
   const handleChange = (event) => {
     setQuantity(event.target.value);
@@ -152,6 +152,11 @@ const Product = ({
   const classes = useStyles();
   const menuItemsOptions = menuItems();
   console.log("menuItemOptions", menuItemsOptions);
+
+  const productFullname =
+    getBrandNameById(product.brand_id, brands) +
+    " " +
+    product.name;
 
   return !loading && product ? (
     <Container maxWidth="lg">
@@ -203,7 +208,7 @@ const Product = ({
               <Box pb={2} px={4}>
                 <Button
                   variant="contained"
-                  onClick={() => onAddToCart("cart", product, quantity)}
+                  onClick={() => onAddToCart("cart", productFullname, product.unit_price, quantity)}
                 >
                   Add to cart
                 </Button>

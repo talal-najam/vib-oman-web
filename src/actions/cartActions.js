@@ -1,7 +1,8 @@
-export const addToCartOk = (type, item, quantity) => {
+export const addToCartOk = (type, itemName, price, quantity) => {
   return (dispatch) => {
     const payload = {
-      item,
+      itemName,
+      price,
       quantity,
     };
 

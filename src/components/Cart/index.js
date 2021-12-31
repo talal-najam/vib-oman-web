@@ -14,14 +14,9 @@ import { InfoDivider } from "../Util/Divider";
 
 const useStyles = makeStyles((theme) => ({
   cartContainer: {
-    borderBottom: "0px",
-    position: "relative",
     background: "rgba(255,255,255,0.1)",
     padding: "1rem",
     paddingTop: "2rem",
-    // background: "rgb(1, 39, 255)",
-    // background:
-    //   "linear-gradient(      0deg,      rgba(1, 39, 47, 1) 0%,      rgba(4, 26, 41, 1) 27%,      rgba(3, 10, 9, 1) 100%    )",
   },
   link: {
     textDecoration: "none",
@@ -91,7 +86,6 @@ const CartMain = ({ onGetProducts }) => {
                     >
                       OMR 43
                     </Button>
-                    
                   </Box>
                 </Box>
               </Grid>
