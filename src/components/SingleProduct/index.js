@@ -208,7 +208,7 @@ const Product = ({
               <Box pb={2} px={4}>
                 <Button
                   variant="contained"
-                  onClick={() => onAddToCart("cart", productFullname, product.unit_price, quantity)}
+                  onClick={() => onAddToCart("cart", product, productFullname, quantity)}
                 >
                   Add to cart
                 </Button>
