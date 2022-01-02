@@ -151,7 +151,6 @@ const Product = ({
 
   const classes = useStyles();
   const menuItemsOptions = menuItems();
-  console.log("menuItemOptions", menuItemsOptions);
 
   const productFullname =
     getBrandNameById(product.brand_id, brands) +

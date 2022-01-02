@@ -2,7 +2,12 @@
 import action from "./action";
 import { postAction } from "./postRequest";
 import { deleteAction } from "./deleteAction";
-import { addToCartOk } from "./cartActions";
+import {
+  addToCartAction,
+  addOneQuantityAction,
+  removeOneQuantityAction,
+  removeAllFromCartAction
+} from "./cartActions";
 
 export const getProducts = (params) =>
   action("products", process.env.REACT_APP_API_HOST, "api/products", params);
@@ -23,4 +28,11 @@ export const deleteRecords = (type, ids) =>
   deleteAction(type, process.env.REACT_APP_API_HOST, ids);
 
 // TODO: Don't like this duplicate tbh. Cleanup required here
-export const addToCart = (type, item, label, quantity) => addToCartOk(type, item, label, quantity);
+export const addToCart = (type, item, label, quantity) =>
+  addToCartAction(type, item, label, quantity);
+
+export const addOneItem = (type, id) => addOneQuantityAction(type, id);
+
+export const removeOneItem = (type, id) => removeOneQuantityAction(type, id);
+
+export const removeFromCart = (type, id) => removeAllFromCartAction(type, id);
