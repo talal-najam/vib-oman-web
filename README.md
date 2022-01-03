@@ -29,7 +29,7 @@ Once packages are installed, start development server in watch mode:
 
 ```bash
 # watch mode
-$ npm run dev
+$ npm start
 ```
 
 Navigate to [http://localhost:3000](http://localhost:3000). Any changes to the web app will be reflected automatically.
